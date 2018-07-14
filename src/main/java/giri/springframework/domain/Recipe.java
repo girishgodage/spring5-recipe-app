@@ -21,15 +21,16 @@ public class Recipe {
     @Lob
     private String directions;
 
-    @Enumerated(value = EnumType.STRING)
-    private Difficulty difficulty;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients =new HashSet<>();
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
-    @OneToOne(cascade= CascadeType.ALL)
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
     @ManyToMany
@@ -116,14 +117,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
 
     public Set<Ingredient> getIngredients() {
@@ -134,6 +134,14 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public Set<Category> getCategories() {
         return categories;
     }
@@ -142,3 +150,4 @@ public class Recipe {
         this.categories = categories;
     }
 }
+
