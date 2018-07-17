@@ -1,10 +1,11 @@
 package giri.springframework.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class UnitOfMeasure {
 

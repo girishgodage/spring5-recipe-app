@@ -1,10 +1,11 @@
 package giri.springframework.domain;
-import lombok.Data;
+import lombok.*;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
